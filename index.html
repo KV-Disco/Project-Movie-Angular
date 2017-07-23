@@ -1,132 +1,92 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="movieApp">
+
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
 
-    <!-- Navigation -->
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header"
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+<body>
+    <!-- Navigation | start of navegator -->
+    <div class="container">
+        <nav class="col-md-12 navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header" <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#"><img src=""></a>
+                    </button>
+                    <a class="navbar-brand" href="#"><img src=""></a>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="#!/">Popular</a>
+                        </li>
+                        <li>
+                            <a href="#!/upcoming">Upcoming</a>
+                        </li>
+                        <li>
+                            <a href="#!/now-playing">Now Playing</a>
+                        </li>
+                        <li>
+                            <a href="#!/top-rated">Top Rated</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-     
-           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">Popular</a>
-                    </li>
-                    <li>
-                        <a href="#">Up Coming</a>
-                    </li>
-                    <li>
-                        <a href="#">Now Playing</a>
-                    </li>
-                    <li>
-                        <a href="#">Top Rated</a>
-                    </li>
-
-                </ul>
-            </div>
-            
-        </div>
-
-    </nav>
-
-    <!-- Page Content -->
+        </nav>
+    </div>
+    <!-- end of navigator -->
+    <!-- Page Content | start of content-->
     <div class="container">
-
-        <!-- Title -->
+        <ng-view></ng-view>
+    </div>
+    <!-- end of content -->
+    <hr>
+    <!-- {{4 + 5}}  -->
+    <!-- Footer -->
+    <footer>
         <div class="row">
             <div class="col-lg-12">
-                <h3>Popular</h3>
+                <p>Copyright © Your Biz 2014</p>
             </div>
         </div>
-      
-
-        <!-- Page Features -->
-        <div ng-controller="PopularMoviesController" class="Movies row text-center">
-
-            <div ng-repeat="movie in movies" class="container col-md-3 col-sm-6 hero-feature">
-                <div class="thumbnail">
-                    <img src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}" alt="">
-                    <div class="caption">
-                        <h3>{{ movie.original_title }}</h3>
-                        <p>{{ movie.release_date }}</p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
+    </footer>
     
+    <!-- angular script -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular-route.min.js"></script>
 
-        <hr>
-{{4 + 5}} 
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright © Your Biz 2014</p>
-                </div>
-            </div>
-        </footer>
+    <!-- MAIN MODULE -->
+    <script type="text/javascript" src="js/app.js"></script>
 
-    </div>
+    <!-- SERVICES -->
+    <script type="text/javascript" src="js/services/services.js"></script>
 
-<!-- angular script -->
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
-<script type="text/javascript" src="js/INDEX.js"></script>
-<!-- <script type="text/javascript">
-    
-    angular.module('movieApp', [])
+    <!-- ROUTES START -->
+    <!-- / |popular -->
+    <script type="text/javascript" src="js/routes/popular/controller.js">
+    </script>
+    <script type="text/javascript" src="js/routes/popular/index.js"></script>
 
-        .controller('PopularMoviesController', function($scope, PopularMovieService) {
-            // var thumbnailHtml = ''
+    <!-- /now-playing -->
+    <script type="text/javascript" src="js/routes/now-playing/controller.js">
+    </script>
+    <script type="text/javascript" src="js/routes/now-playing/index.js"></script>
 
-            PopularMovieService.getPopularMovie() 
-                .then(function(response) {
-                    console.log(response)
-                    $scope.movies = response.data.results
-                    // response.data.results.forEach(function(movies){
-                    //     $scope.title = movies.original_title
-                    //     $scope.dateOfRealise = movies.release_date
-                    // })
-                    // $scope.title = response.data.results[0].original_title
-                    // $scope.dateOfRealise = response.data.results[0].release_date
-                    // $scope.popularmovies = response.data.results["0"].poster_path
+    <!-- /top-rated -->
+    <script type="text/javascript" src="js/routes/top-rated/controller.js">
+    </script>
+    <script type="text/javascript" src="js/routes/top-rated/index.js"></script>
 
-                })
-            
-        })
-
-
-        .factory('PopularMovieService', function($http) {
-            function getPopularMovie() {
-                var url = 'http://api.themoviedb.org/3/discover/movie?api_key=eb3774bb93404d76b82e0ef0d6c618d7'
-                return $http.get(url)
-                console.log(url)
-            }
-            return { 
-                getPopularMovie : getPopularMovie
-            }
-        })
-
-        .factory('MovieImageService', function($http) {
-            function getImage() {
-                var url = 'https://image.tmdb.org/t/p/w500' 
-            }
-        })
-</script> -->
-    
+    <!-- /upcoming -->
+    <script type="text/javascript" src="js/routes/upcoming/controller.js">
+    </script>
+    <script type="text/javascript" src="js/routes/upcoming/index.js"></script>
 </body>
+
 </html>

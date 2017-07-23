@@ -1,0 +1,21 @@
+
+<div class="container">
+    <!-- Title -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h3>Top Rated</h3>
+        </div>
+    </div>
+    <!-- Page Features -->
+    <div class="Movies row text-center">
+        <div ng-repeat="movie in movies" class="container col-md-3 col-sm-6 hero-feature">
+            <div class="thumbnail">
+                <img src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}" alt="">
+                <div class="caption">
+                    <h3>{{ movie.original_title }}</h3>
+                    <p>{{ movie.release_date }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
